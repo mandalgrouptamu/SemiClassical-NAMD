@@ -36,6 +36,7 @@ model_ =  getInput(inputtxt,"Model")
 method_ = getInput(inputtxt,"Method").split("-")
 exec(f"import {model_} as model")
 exec(f"import {method_[0]} as method")
+exec(f"from {model_} import parameters")
 try:
     stype = method_[1]
 except:
@@ -83,9 +84,10 @@ if method_[0]=="nrpmd":
 
 #---- overriden parameters ------
 
-parameters = [i for i in inputtxt if i.split("#")[0].split("=")[0].find("$") !=- 1]
-for p in parameters:
+allparameters = [i for i in inputtxt if i.split("#")[0].split("=")[0].find("$") !=- 1]
+for p in allparameters:
     exec(f"par.{p.split('=')[0].split('$')[1]} = {p.split('=')[1].split('#')[0]}")
+    exec(f"parameters.{p.split('=')[0].split('$')[1]} = {p.split('=')[1].split('#')[0]}")
     print(f"Overriding parameters: {p.split('=')[0].split('$')[1]} = {p.split('=')[1].split('#')[0]}")
 #--------------------------------
 

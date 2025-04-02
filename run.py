@@ -1,3 +1,13 @@
+#!/sw/eb/sw/Anaconda3/2024.02-1/bin/python
+
+##NECESSARY JOB SPECIFICATIONS
+#SBATCH --job-name=NAMD         #Set the job name to "JobExample1"
+#SBATCH --time=01:30:00         #Set the wall clock limit to 1hr and 30min
+#SBATCH --ntasks=1               #Request 1 task
+#SBATCH --mem=2560M                   
+#SBATCH --output=output/out.%j            
+
+
 import os,sys 
 sys.path.append(os.popen("pwd").read().replace("\n","")+"/Model")
 def getInput(input,key):
